@@ -9,7 +9,8 @@ import {
 	View,
     Text,
     Image,
-    ScrollView
+    ScrollView,
+    StyleSheet
 } from 'react-native';
 export default class ItemDetails extends Component {
 	constructor () {
@@ -18,38 +19,50 @@ export default class ItemDetails extends Component {
     renderItem() {
         let props = this.props.data;
         return(
-            <View 
-                style = {[styles.center]}
-            >
-                <Image 
-                    source = { props.src } 
-                    style = {[styles.fullImage]}
-                />
-                <View>
-                    <Text 
-                        style = {[styles.itemWidth, styles.normalFont, styles.plSm]}
-                    >
-                        {props.name}
-                    </Text>
-                    <Text 
-                        style = {[styles.normalFont, styles.plSm]}
-                    >
-                        {props.addr}
-                    </Text>
-                    <Text 
-                        style = {[styles.normalFont, styles.plSm]}
-                    >
-                        Rating: {props.rating}
-                    </Text>
-                </View>
-            </View>
-        )
+            <View style={{flex: 1, flexDirection: 'row'}}>
+            	<View style={styles2.container}>
+            		<Image
+            			resizeMode="contain"
+            			source = { props.src } 
+            			style={[styles.center]} 
+            		/>
+            		<View style={{marginTop:20}}>
+	            		<Text 
+		                    style = {[styles.normalFont, styles.plSm]}
+	            			numberOfLines = {1}
+		                >
+		                    Name : {props.name}
+		                </Text>
+		                <Text 
+		                    style = {[styles.normalFont, styles.plSm]}
+		                	numberOfLines = {1}
+		                >
+		                    Address : {props.addr}
+		                </Text>
+		                <Text 
+		                    style = {[styles.normalFont, styles.plSm]}
+		                	numberOfLines = {1}
+		                >
+		                    Rating: {props.rating}
+		                </Text>
+	                </View>
+            	</View>
+            	
+            </View>    
+        );
     }
 	render () {
 		return (
-            <View>
-                {this.renderItem()}
-            </View>
+             this.renderItem()
+            
 		);
 	}
 }
+var styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 30,
+    alignItems: 'center',
+    position: 'relative'
+  }
+});
